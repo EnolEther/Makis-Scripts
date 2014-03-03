@@ -1,0 +1,1 @@
+This repository contains bash shell scripts that I have written to maintain my coding enviornment as well as my RoR applications and complex initializations like a developement webserver.
