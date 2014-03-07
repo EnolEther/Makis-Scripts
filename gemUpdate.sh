@@ -10,7 +10,7 @@ cecho "# Outded gems";
 gem outdated;
 pecho "Done.\n";
 
-prompt_c;
+prompt_c "# Update ruby gems?";
 read ans;
 if [ "$ans" != "y" ] && [ "$ans" != "Y" ]
 	then
@@ -21,8 +21,7 @@ if [ "$ans" != "y" ] && [ "$ans" != "Y" ]
 		gem update;
 		pecho "Done.\n";
 
-		cecho "# Regenerate gem Stubs?";
-		prompt_c;
+		prompt_c "# Regenerate gem Stubs?";
 		read ans;
 		if [ "$ans" != "y" ] && [ "$ans" != "Y" ]
 			then
@@ -30,11 +29,10 @@ if [ "$ans" != "y" ] && [ "$ans" != "Y" ]
 				return;
 			else
 				gem regenerate_binstubs;
-				pecho "Done.\n";
+				pecho "# Done.\n";
 		fi
 		
-		cecho "# Rehash rbenv?";
-		prompt_c;
+		prompt_c "# Rehash rbenv?";
 		read ans;
 		if [ "$ans" != "y" ] && [ "$ans" != "Y" ]
 			then
