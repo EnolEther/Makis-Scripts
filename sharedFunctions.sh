@@ -7,7 +7,7 @@
 #############################################################
 ECR="\033[0;31m";   # Red colored font
 ECG="\033[0;32m";   # Green colored font
-ECY="\033[0;33m";   # Yellow colored font
+ECO="\033[0;33m";   # Orange colored font
 ECBl="\033[0;34m";  # Black colored font?
 ECP="\033[0;35m";   # Purple colored font
 ECC="\033[0;36m";   # Blue Colored font
@@ -25,8 +25,8 @@ function recho {
 function pecho {
   echo -e $ECP""$1""$ECD;   # Purple colored output
 }
-function yecho {
-  echo -e $ECY""$1""$ECD;   # Yellow colored output
+function oecho {
+  echo -e $ECO""$1""$ECD;   # Orange colored output
 }
 function reset_text {
   echo -ne $ECD;            # Resets text to default colors
@@ -36,11 +36,22 @@ function reset_text {
 # Generic prompts for continuing or quiting a running script #
 ##############################################################
 function prompt_c {
-  echo -ne $ECC"Type ["
-  echo -ne $ECG"y"
-  echo -ne $ECC"|"
-  echo -ne $ECG"Y"
-  echo -ne $ECC"] to continue: > "$ECD
+  echo -e $ECC""$1""$ECD;
+  echo -ne $ECO"Type [";
+  echo -ne $ECG"y";
+  echo -ne $ECO"|";
+  echo -ne $ECG"Y";
+  echo -ne $ECO"] to continue: > "$ECD;
+}
+# Include warning dialog
+function prompt_w {
+  echo -e $ECC""$1""$ECD;
+  echo -e $ECR""$2""$ECD;
+  echo -ne $ECO"Type [";
+  echo -ne $ECG"y";
+  echo -ne $ECO"|";
+  echo -ne $ECG"Y";
+  echo -ne $ECO"] to continue: > "$ECD;
 }
 # Prompt for interupting a process that requires any input to quit
 function prompt_q {
@@ -53,9 +64,50 @@ function prompt_q {
 #################################################################
 function announceWorkingDir {
   echo -ne $ECC"# Working on:";
-  echo -ne $ECY" $1 \n"$ECD;
+  echo -ne $ECO" $1 \n"$ECD;
 }
 function announceAppDir {
   echo -ne $ECC"# Starting app in:";
-  echo -ne $ECY" $1 \n"$ECD;
+  echo -ne $ECO" $1 \n"$ECD;
 }
+
+#############################################################
+# Prompts to change working directory                       #
+# changeWorkingDir emptyVar workingDirVar                   #
+# where emptyVar is an empty variable used to return the    #
+#     function output.                                      #
+# workingDirVar is the variable that stores the default     #
+#     working directory.                                    #
+# Depending on the user input the directory to be used      #
+#     is passed to $emptyVar                                #
+#############################################################
+function changeWorkingDir {
+  local __newdir=$1;
+  echo -ne $ECC"# Change to a different directory?\n";
+  echo -ne $ECO"Type [";
+  echo -ne $ECG"y";
+  echo -ne $ECO"|";
+  echo -ne $ECG"Y";
+  echo -ne $ECO"] to continue: > "$ECD;
+  read ans
+  if [ "$ans" != "y" ] && [ "$ans" != "Y" ]
+    then
+      echo "";
+      eval $__newdir="'$2'";
+    else
+      echo -ne $ECO"Enter full directory path: > "$ECD;
+      read ans;
+      echo "";
+      eval $__newdir="'$ans'";
+  fi
+}
+
+
+
+
+
+
+
+
+
+
