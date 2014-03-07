@@ -14,7 +14,7 @@ ECC="\033[0;36m";   # Blue Colored font
 ECD="\033[0m";      # Defualt colored font
 
 #####################################################################
-# The following fuctions echo colored text and reset to the colors  #
+# The following fuctions echo colored text or reset to the colors   #
 #####################################################################
 function cecho {
   echo -e $ECC""$1""$ECD;   # Blue colored output
@@ -30,6 +30,20 @@ function oecho {
 }
 function reset_text {
   echo -ne $ECD;            # Resets text to default colors
+}
+
+# Function for the oft repeated echos
+function sayDone {
+  pecho "# Done.\n"
+}
+function saySkipping {
+  recho "# Skipping\n";
+}
+function sayFinished {
+  pecho "# Finished\n";
+}
+function sayExiting {
+  recho "# Exiting.\n";
 }
 
 ##############################################################
