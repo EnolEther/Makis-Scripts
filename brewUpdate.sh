@@ -6,37 +6,50 @@ source ./sharedFunctions.sh;
 
 cecho "# Starting Brew Updates\n";
 
-cecho "# Outded formulae";
+cecho "# Checking for outded formulae.";
 brew outdated;
 pecho "Done.\n";
 
-cecho "# Missing formulae";
+cecho "# Checking for missing formulae";
 brew missing;
 pecho "Done.\n";
 
-prompt_c;
+prompt_c "# Run brew update and brew upgrade?";
 read ans;
 if [ "$ans" != "y" ] && [ "$ans" != "Y" ]
 	then
 		return;
 	else
-		cecho "\n# Updating brew... ";
+		cecho "\n# Updating brew.";
 		brew update;
 		pecho "# Done.\n"
 
-		cecho "# Upgrading brew... ";
+		cecho "# Upgrading brew.";
 		brew upgrade;
 		pecho "# Done.\n"
 
-		cecho "# Cleaning brew... ";
-		brew cleanup;
+		cecho "# Checking for unneeded kegs and formulae. ";
+		brew cleanup -n;
+
+		prompt_c "# Run brew cleanup?"
+		read ans;
+		if [ "$ans" != "y" ] && [ "$ans" != "Y" ]
+			then
+				return;
+			else
+				cecho "# Running brew cleanup";
+				brew cleanip;
+				pecho "# Done.\n"
+		fi
+
+
+
 		pecho "# Done.\n"
 
 		pecho "# Finished\n";
 fi
 
-cecho "# Run Brew Doctor?";
-prompt_c;
+prompt_c "# Run Brew Doctor?";
 read ans;
 if [ "$ans" != "y" ] && [ "$ans" != "Y" ]
 	then
