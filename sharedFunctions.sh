@@ -32,7 +32,9 @@ function reset_text {
   echo -ne $ECD;            # Resets text to default colors
 }
 
-# Function for the oft repeated echos
+###################################################
+# Functions for echos that are repeatedly used.   #
+###################################################
 function sayDone {
   pecho "# Done.\n"
 }
@@ -67,7 +69,10 @@ function prompt_w {
   echo -ne $ECG"Y";
   echo -ne $ECO"] to continue: > "$ECD;
 }
-# Prompt for interupting a process that requires any input to quit
+
+#####################################################################
+# Prompt for interupting a process that requires any input to quit  #
+#####################################################################
 function prompt_q {
   echo -ne $ECC"# Running. Waiting for input to quit: > "$ECD;
 }
