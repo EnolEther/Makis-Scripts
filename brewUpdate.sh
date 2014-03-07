@@ -30,6 +30,7 @@ if [ "$ans" != "y" ] && [ "$ans" != "Y" ]
 
 		cecho "# Checking for unneeded kegs and formulae. ";
 		brew cleanup -n;
+		pecho "# Done.\n"
 
 		prompt_c "# Run brew cleanup?"
 		read ans;
@@ -38,15 +39,11 @@ if [ "$ans" != "y" ] && [ "$ans" != "Y" ]
 				return;
 			else
 				cecho "# Running brew cleanup";
-				brew cleanip;
-				pecho "# Done.\n"
+				brew cleanup;
 		fi
-
-
-
 		pecho "# Done.\n"
 
-		pecho "# Finished\n";
+		pecho "# Finished updating\n";
 fi
 
 prompt_c "# Run Brew Doctor?";
