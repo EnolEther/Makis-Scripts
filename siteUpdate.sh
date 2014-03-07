@@ -7,7 +7,7 @@ source ./sharedFunctions.sh
 SDIR=$PWD;
 UDIR=/Users/jmakis/Ruby/mywebsite;
 
-cecho "# Starting site dependency update\n";
+recho "\n# Starting site dependency update\n";
 
 announceWorkingDir $UDIR;
 changeWorkingDir NDIR $UDIR;
@@ -16,53 +16,51 @@ prompt_c "# Work on $NDIR?";
 read ans;
 if [ "$ans" != "y" ] && [ "$ans" != "Y" ]
 	then
-		recho "# Exiting.\n";
+		sayExiting;
 		cd $SDIR;
 		return;
 	else
 		cd $NDIR;
 		cecho "\n# Checking for missing gems";
 		bundle check;
-		pecho "# Done \n";
+		sayDone;
 
 		cecho "# Checking for outdated gems";
 		bundle outdated;
-		pecho "# Done \n";
+		sayDone;
 
 		prompt_c "# Update gems?";
 		read ans;
 		if [ "$ans" != "y" ] && [ "$ans" != "Y" ]
 			then
-				recho "# Skipping\n";
+				saySkipping;
 			else
 				cecho "\n# Updating outdated gems";
 				bundle update;
-				pecho "# Done \n";
+				sayDone;
 		fi
 
 		prompt_c "# Run bundler install and update binstubs?";
 		read ans;
 		if [ "$ans" != "y" ] && [ "$ans" != "Y" ]
 			then
-				recho "# Skipping\n";
+				saySkipping;
 			else
 				pecho "\n# Running bundle install --binstubs...\n";
 				bundle install --binstubs=./bundler_stubs;
-				pecho "# Done \n";
+				sayDone;
 		fi
 
 		prompt_w "# Clean bundled gems?" "# Will run bundle clean --force";
 		read ans;
 		if [ "$ans" != "y" ] && [ "$ans" != "Y" ]
 			then
-				recho "# Skipping.";
-				cd $SDIR;
-				return;
+				saySkipping;
 			else
 				pecho "\n# Cleaning\n";
 				bundle clean --force;
-				pecho "# Done \n";
+				sayDone;
 		fi
 		cd $SDIR;
-		pecho "# Done \n";
+		sayFinished;
 fi
