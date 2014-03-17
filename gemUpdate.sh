@@ -20,6 +20,8 @@ if [ "$ans" != "y" ] && [ "$ans" != "Y" ]
 		gem update;
 		sayDone;
 
+		# needs rubygems-bundler
+		# gem install rubygems-bundler
 		prompt_c "# Regenerate gem Stubs?";
 		read ans;
 		if [ "$ans" != "y" ] && [ "$ans" != "Y" ]
