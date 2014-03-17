@@ -11,10 +11,10 @@ ECO="\033[0;33m";   # Orange colored font
 ECBl="\033[0;34m";  # Black colored font?
 ECP="\033[0;35m";   # Purple colored font
 ECC="\033[0;36m";   # Blue Colored font
-ECD="\033[0m";      # Defualt colored font
+ECD="\033[0m";      # Default colored font
 
 #####################################################################
-# The following fuctions echo colored text or reset to the colors   #
+# The following functions echo colored text or reset to the colors  #
 #####################################################################
 function cecho {
   echo -e $ECC""$1""$ECD;   # Blue colored output
@@ -33,19 +33,22 @@ function reset_text {
 }
 
 ###################################################
-# Functions for echos that are repeatedly used.   #
+# Functions for echoes that are repeatedly used.  #
 ###################################################
+function sayContinue {
+  recho "# Continuing. \n";
+}
 function sayDone {
-  pecho "# Done.\n"
+  pecho "# Done. \n"
 }
 function saySkipping {
-  recho "# Skipping\n";
+  recho "# Skipping. \n";
 }
 function sayFinished {
-  pecho "# Finished\n";
+  pecho "# Finished. \n";
 }
 function sayExiting {
-  recho "# Exiting.\n";
+  recho "# Exiting. \n";
 }
 
 ##############################################################
@@ -71,22 +74,22 @@ function prompt_w {
 }
 
 #####################################################################
-# Prompt for interupting a process that requires any input to quit  #
+# Prompt for interrupting a process that requires any input to quit  #
 #####################################################################
 function prompt_q {
   echo -ne $ECC"# Running. Waiting for input to quit: > "$ECD;
 }
 
 #################################################################
-# These functions are for announcing dir changes for the script #
-# and are usually followed by a continue prompt                 #
+# These functions are for announcing directory changes for the  #
+# script and are usually followed by a continue prompt          #
 #################################################################
 function announceWorkingDir {
   echo -ne $ECC"# Working on:";
   echo -ne $ECO" $1 \n"$ECD;
 }
 function announceAppDir {
-  echo -ne $ECC"# Starting app in:";
+  echo -ne $ECC"# Starting application in:";
   echo -ne $ECO" $1 \n"$ECD;
 }
 
@@ -102,7 +105,7 @@ function announceAppDir {
 #############################################################
 function changeWorkingDir {
   local __newdir=$1;
-  echo -ne $ECC"# Change to a different directory?\n";
+  echo -ne $ECC"# Change to a different directory? \n";
   echo -ne $ECO"Type [";
   echo -ne $ECG"y";
   echo -ne $ECO"|";
@@ -120,13 +123,3 @@ function changeWorkingDir {
       eval $__newdir="'$ans'";
   fi
 }
-
-
-
-
-
-
-
-
-
-
