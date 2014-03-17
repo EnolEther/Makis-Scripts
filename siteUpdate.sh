@@ -1,13 +1,13 @@
 #!/bin/bash
 source ./sharedFunctions.sh
 
-# Allows interupts to break out of entire script.
+## Allows interrupts to break out of entire script.
 # set -e; # Too forceful of an exit
 
 SDIR=$PWD;
 UDIR=/Users/jmakis/Ruby/mywebsite;
 
-recho "\n# Starting site dependency update\n";
+recho "\n# Starting site dependency update. \n";
 
 announceWorkingDir $UDIR;
 changeWorkingDir NDIR $UDIR;
@@ -21,13 +21,23 @@ if [ "$ans" != "y" ] && [ "$ans" != "Y" ]
 		return;
 	else
 		cd $NDIR;
-		cecho "\n# Checking for missing gems";
-		bundle check;
-		sayDone;
-
-		cecho "# Checking for outdated gems";
-		bundle outdated;
-		sayDone;
+		
+		prompt_c "\n# Check for missing & outdated gems?";
+		read ans;
+		if [ "$ans" != "y" ] && [ "$ans" != "Y" ]
+			then
+				saySkipping;
+			else
+				cecho "# Checking for missing gems.";
+				bundle update;
+				sayDone;
+				bundle check;
+				sayDone;
+				cecho "# Checking for outdated gems.";
+				bundle outdated;
+				sayDone;
+		fi
+		
 
 		prompt_c "# Update gems?";
 		read ans;
@@ -35,7 +45,7 @@ if [ "$ans" != "y" ] && [ "$ans" != "Y" ]
 			then
 				saySkipping;
 			else
-				cecho "\n# Updating outdated gems";
+				cecho "\n# Updating outdated gems.";
 				bundle update;
 				sayDone;
 		fi
@@ -46,21 +56,31 @@ if [ "$ans" != "y" ] && [ "$ans" != "Y" ]
 			then
 				saySkipping;
 			else
-				pecho "\n# Running bundle install --binstubs...\n";
+				pecho "\n# Running bundle install --binstubs. \n";
 				bundle install --binstubs=./bundler_stubs;
 				sayDone;
 		fi
 
-		prompt_w "# Clean bundled gems?" "# Will run bundle clean --force";
+		prompt_w "# Clean bundled gems?" "# Will run bundle clean --force.";
 		read ans;
 		if [ "$ans" != "y" ] && [ "$ans" != "Y" ]
 			then
 				saySkipping;
 			else
-				pecho "\n# Cleaning\n";
+				pecho "\n# Cleaning \n";
 				bundle clean --force;
 				sayDone;
 		fi
-		cd $SDIR;
-		sayFinished;
+
+		prompt_c "# Remain in working directory?";
+		read ans;
+		if [ "$ans" != "y" ] && [ "$ans" != "Y" ]
+			then
+				cd $SDIR
+				sayDone;
+			else
+				cd $NDIR;
+				sayDone;
+		fi
 fi
+sayFinished;
