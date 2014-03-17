@@ -1,16 +1,16 @@
 #!/bin/bash
 source ./sharedFunctions.sh;
 
-# Allows interupts to break out of entire script.
+# Allows interrupts to break out of entire script.
 # set -e; # Too forceful of an exit
 
-recho "\n# Starting Brew Updates\n";
+recho "\n# Starting Brew Update. \n";
 
-cecho "# Checking for outded formulae.";
+cecho "# Checking for outdated formulae.";
 brew outdated;
 sayDone;
 
-cecho "# Checking for missing formulae";
+cecho "# Checking for missing formulae. ";
 brew missing;
 sayDone;
 
@@ -43,7 +43,7 @@ if [ "$ans" != "y" ] && [ "$ans" != "Y" ]
 		fi
 		sayDone;
 
-		pecho "# Finished updating\n";
+		pecho "# Finished updating. \n";
 fi
 
 prompt_c "# Run Brew Doctor?";
@@ -52,7 +52,7 @@ if [ "$ans" != "y" ] && [ "$ans" != "Y" ]
 	then
 		saySkipping;
 	else
-		cecho "\n# Performing Checkup... ";
+		cecho "\n# Performing Checkup. ";
 		brew doctor;
 		sayDone;
 fi
