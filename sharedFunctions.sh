@@ -107,7 +107,7 @@ function changeWorkingDir {
   echo -ne $ECG"y";
   echo -ne $ECO"|";
   echo -ne $ECG"Y";
-  echo -ne $ECO"] to continue: > "$ECD;
+  echo -ne $ECO"] to change directory: > "$ECD;
   read ans
   if [ "$ans" != "y" ] && [ "$ans" != "Y" ]
     then
