@@ -1,12 +1,12 @@
 #!/bin/bash
 source ./sharedFunctions.sh
 
-# Allows interupts to break out of entire script.
+# Allows interrupts to break out of entire script.
 # set -e; # Too forceful of an exit
 
-recho "\n# Starting Gem Update\n";
+recho "\n# Starting Gem Update. \n";
 
-cecho "# Outded gems";
+cecho "# Outdated gems";
 gem outdated;
 sayDone;
 
