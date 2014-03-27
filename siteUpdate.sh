@@ -28,9 +28,7 @@ if [ "$ans" != "y" ] && [ "$ans" != "Y" ]
 			then
 				saySkipping;
 			else
-				cecho "# Checking for missing gems.";
-				bundle update;
-				sayDone;
+				cecho "\n# Checking for missing gems.";
 				bundle check;
 				sayDone;
 				cecho "# Checking for outdated gems.";

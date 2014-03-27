@@ -16,7 +16,7 @@ if [ "$ans" != "y" ] && [ "$ans" != "Y" ]
 	then
 		saySkipping;
 	else
-		cecho "# Updating gems... ";
+		cecho "\n# Updating gems... ";
 		gem update;
 		sayDone;
 
