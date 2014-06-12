@@ -22,15 +22,15 @@ if [ "$ans" != "y" ] && [ "$ans" != "Y" ]
 
 		# needs rubygems-bundler
 		# gem install rubygems-bundler
-		prompt_c "# Regenerate gem Stubs?";
-		read ans;
-		if [ "$ans" != "y" ] && [ "$ans" != "Y" ]
-			then
-				saySkipping;
-			else
-				gem regenerate_binstubs;
-				sayDone;
-		fi
+		# prompt_c "# Regenerate gem Stubs?";
+		# read ans;
+		# if [ "$ans" != "y" ] && [ "$ans" != "Y" ]
+		# 	then
+		# 		saySkipping;
+		# 	else
+		# 		gem regenerate_binstubs;
+		# 		sayDone;
+		# fi
 		
 		prompt_c "# Rehash rbenv?";
 		read ans;
