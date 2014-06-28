@@ -1,0 +1,17 @@
+# alias and functions to make my life easier
+alias ls="ls -Gho";
+alias lsa="ls -Ghoa";
+alias rm="rm -iv";
+alias rmd="rm -ivR";
+alias cp="cp -iv";
+alias mv="mv -iv";
+alias home="cd ~";
+alias math="MathKernel";
+alias reshell="exec $SHELL -l";
+alias mysite="cd ~/Ruby/mywebsite/";
+alias scripts="cd ~/Scripts/";
+
+alias gitstat="clear; git status; echo;"
+
+alias herokulive="heroku logs -t"
+alias servesite=". ~/Scripts/serveSite.sh"
